@@ -1,3 +1,6 @@
+// questionsData was creating using AI. I created the first question as an example and then asked ai to use that format and generate 200 common questions
+//  that junior web developers will be expected to know and understand with a correct answer, and then two other answers that are plausible sounding but wrong.
+
 const questionsData = [
     {
         question: "What does the .map() function do?",

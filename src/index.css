@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 * {
@@ -6,12 +7,19 @@
   box-sizing: border-box;
 }
 
+/* CSS Custom Properties (Variables) */
+
 :root {
+  /* Responsive font sizes */
   --font-size-standard: clamp(1rem, 2.5vw, 1.2rem);
   --font-size-large: clamp(2.5rem, 6vw, 3rem);
   --font-size-medium: clamp(1.8rem, 4vw, 2.1rem);
+  
+  /* Genera; typography settings */
   --line-height: 1.6;
   --letter-spacing: 0.02rem;
+  
+  /* Colors */
   --colour-light-gray: #F8F9FA;
   --colour-light-blue: #F0F4FF;
   --colour-clicked-answer: #E8ECFF;
@@ -34,8 +42,8 @@ body {
   align-items: center;
 }
 
+/* Main app container */
 #root {
-  background-color: var(--colour-light-gray);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,12 +55,15 @@ body {
   background-color: var(--colour-light-blue);
 }
 
+/* ==================== FOOTER ==================== */
 .footer {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* ==================== BUTTONS ==================== */
+/* Base button styles  */
 .start-btn,
 .commit-btn,
 .restart-btn,
@@ -72,38 +83,57 @@ body {
   border: none;
 }
 
+/* Hidden by default, shows when answer is selected */
 .commit-btn {
   opacity: 0;
-  transition: box-shadow 250ms ease-in;
 }
 
 .restart-btn {
   margin: 3.5rem 0;
 }
 
-button>svg {
+/* Button icon animations */
+button > svg {
   margin-left: 1rem;
+  transition: transform 300ms ease-in-out;
 }
 
-a > svg {
-  font-size: 3.5rem;
+/* Icon slides right on hover */
+button:hover > svg {
+  transform: translateX(4px);
 }
 
+/* Rotation effect for restart button */
+.restart-btn:hover>svg {
+  transform: rotate(-360deg);
+}
+
+/* Button hover shadow effects */
 .start-btn:hover,
 .commit-btn:hover,
 .restart-btn:hover {
   box-shadow: 0 8px 16px var(--colour-dark-blue);
 }
 
+/* ==================== LAYOUT SECTIONS ==================== */
+/* Common layout for main content sections */
 .intro-section,
-.question-section {
+.question-section,
+.questions-review-section {
   width: 100%;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.intro-section,
+.question-section {
   padding: 0 1rem;
 }
 
+/* ==================== TYPOGRAPHY ==================== */
+/* Main page titles */
 .title {
   font-size: var(--font-size-large);
   margin: 4rem 0 2rem 0;
@@ -113,40 +143,7 @@ a > svg {
   line-height: var(--line-height);
 }
 
-.menu-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 1rem;
-  left: 1rem;
-   box-shadow: 0 8px 16px rgba(26, 26, 26, 0.15), 0 2px 4px rgba(26, 26, 26, 0.1);
-   padding: 1rem;
-   border-radius: 2rem;
-   cursor: pointer;
-}
-
-.menu-container > svg {
-  font-size:10vw ;
-  color: var(--colour-dark-blue);
-  line-height: 0;
-}
-
-.start-position {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  opacity: 0;
-}
-
-.menu-expanded {
-  
-}
-
-
-
+/* Subtitle styling */
 .sub-title {
   font-size: var(--font-size-medium);
   color: var(--colour-medium-gray);
@@ -156,20 +153,29 @@ a > svg {
   line-height: var(--line-height);
 }
 
-.text {
+/* Shared styles for body text and question counter */
+.text,
+.question-number-text {
   font-size: var(--font-size-standard);
-  margin-bottom: 1.5rem;
   color: var(--colour-medium-gray);
   text-align: center;
   line-height: var(--line-height);
 }
 
+/* Introductory paragraph text */
+.text {
+  margin-bottom: 1.5rem;
+}
+
+/* ==================== QUIZ ELEMENTS ==================== */
+/* Container for question and answers */
 .question-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Question text styling */
 .question {
   margin-bottom: 3rem;
   font-size: var(--font-size-medium);
@@ -179,28 +185,12 @@ a > svg {
   line-height: var(--line-height);
 }
 
+/* Current question counter display */
 .question-number-text {
-  font-size: var(--font-size-standard);
-  color: var(--colour-medium-gray);
   margin-bottom: 3rem;
-  text-align: center;
-  line-height: var(--line-height);
 }
 
-.answers-section {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.answers-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 3rem;
-}
-
+/* Individual answer option styling */
 .answer {
   margin-bottom: 1rem;
   font-size: var(--font-size-standard);
@@ -220,18 +210,21 @@ a > svg {
   line-height: var(--line-height);
 }
 
+/* Selected answer highlight state */
 .clicked-answer {
   background-color: var(--colour-clicked-answer);
   border: 1px var(--colour-medium-gray) solid;
   box-shadow: 0 8px 16px rgba(26, 26, 26, 0.15), 0 2px 4px rgba(26, 26, 26, 0.1);
 }
 
-.progress-container,
-.final-progress-container {
+/* ==================== PROGRESS TRACKING ==================== */
+/* Progress indicator container */
+.progress-container {
   display: flex;
   gap: 2px;
 }
 
+/* Individual progress box */
 .progress-element {
   width: 8vw;
   aspect-ratio: 1/1;
@@ -243,6 +236,8 @@ a > svg {
   border: 1px var(--colour-dark-gray) solid;
 }
 
+/* ==================== ANSWER RESULT STATES ==================== */
+/* Base styles for correct/incorrect answer indicators */
 .incorrect-answer,
 .correct-answer {
   color: var(--colour-light-gray);
@@ -256,16 +251,21 @@ a > svg {
   background-color: var(--colour-green);
 }
 
+/* Answer result icons */
+.incorrect-answer-icon,
+.correct-answer-icon {
+  font-size: 2.5rem;
+}
+
 .incorrect-answer-icon {
   color: var(--colour-red);
-  font-size: 2.5rem;
 }
 
 .correct-answer-icon {
   color: var(--colour-green);
-  font-size: 2.5rem;
 }
 
+/* FontAwesome icon styling */
 .fa-check,
 .fa-xmark,
 .fa-angle-right {
@@ -273,67 +273,48 @@ a > svg {
   font-size: 2rem;
 }
 
-.drop-in {
-  animation: drop-in 500ms ease-out forwards;
-}
-
+/* ==================== COMPLETION & REVIEW ==================== */
+/* Quiz completion screen layout */
 .completion-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.fa-list,
-.fa-rotate-left {
-  font-size: 1.75rem;
-  cursor: pointer;
-  transition: 500ms all ease-in-out;
-  border-radius: 50%;
-  padding-left: 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Review section container */
 .questions-review-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow: hidden;
 }
 
+/* Fade-in effect for commit button */
 .opacity-full {
   opacity: 1;
   transition: opacity 500ms ease-in, box-shadow 250ms ease-in;
 }
 
-.review-question-section {
+/* Disable pointer events when needed */
+.disabled {
+  pointer-events: none;
+}
+
+/* Individual review question card */
+.review-question-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   width: 95%;
+  max-width: 900px;
   z-index: 2;
   margin-bottom: 2rem;
   flex-shrink: 0;
-  margin-bottom: 2rem;
 }
 
-.review-question-section:last-of-type {
+/* Remove bottom margin from last review item */
+.review-question-container:last-of-type {
   margin-bottom: 0;
 }
 
-.review-question-btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 2.5rem;
-}
-
-.review-question-header-flex-container .sub-title {
-  margin: 0;
-}
-
+/* Review question text with icon */
 .review-question {
   display: flex;
   justify-content: space-between;
@@ -349,11 +330,11 @@ a > svg {
   width: 100%;
 }
 
+/* Review answer boxes - shared styles */
 .review-correct-answer,
 .review-incorrect-answer {
   font-size: var(--font-size-standard);
   color: var(--colour-light-gray);
-  background-color: var(--colour-green);
   font-style: italic;
   padding: 1rem;
   display: flex;
@@ -364,52 +345,45 @@ a > svg {
   width: 100%;
 }
 
+.review-correct-answer {
+  background-color: var(--colour-green);
+}
+
 .review-incorrect-answer {
   background-color: var(--colour-red);
 }
 
+/* "Learn more" Google search link for incorrect answers */
 .find-out-more {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 10rem;
-  height: 3.5rem;
-  font-size: 1.25rem;
-  color: var(--colour-medium-gray);
+  padding: 0.75rem 1.5rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  font-weight: 500;
+  color: var(--colour-dark-blue);
   text-decoration: none;
-  /* transform: translateY(-3.5rem); */
-  transition: all 600ms ease-out;
-  position: relative;
-  /* z-index: -1; */
-  border: 1px var(--colour-medium-gray) solid;
+  border: 2px solid var(--colour-dark-blue);
+  border-radius: 0.5rem;
+  transition: all 300ms ease-in-out;
+  margin-top: 0.5rem;
 }
 
+/* Link hover  */
 .find-out-more:hover {
-  box-shadow: 0 8px 16px var(--colour-dark-blue);
+  background-color: var(--colour-dark-blue);
+  color: var(--colour-light-gray);
+  box-shadow: 0 4px 12px rgba(45, 74, 123, 0.3);
 }
 
+/* Icon within learn more link */
 .find-out-more>svg {
-  transition: all 600ms ease-out;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  margin-left: 1rem;
+  transition: transform 300ms ease-in-out;
 }
 
+/* Icon slides right on hover */
 .find-out-more:hover>svg {
-  transform: translatex(2px);
-}
-
-
-@keyframes drop-in {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-
-  50% {
-    transform: scale(1.2);
-    opacity: .5;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  transform: translateX(4px);
 }
