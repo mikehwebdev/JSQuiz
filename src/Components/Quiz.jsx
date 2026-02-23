@@ -1,11 +1,11 @@
-import { FaArrowRotateLeft } from "react-icons/fa6";
+import { FaArrowRotateLeft } from "react-icons/fa6"
 import { useState } from "react";
 // Import data 
-import { progressData } from "../data/progressData";
+import { progressData } from "../data/progressData"
 import { questionsData } from '../data/questionsData'
 
-import Footer from "./Footer";
-import AnswersSummary from "./AnswersSummary";
+import Footer from "./Footer"
+import AnswersSummary from "./AnswersSummary"
 
 /** Quiz Component - Main quiz interface that manages:
  * - Question display and answer selection
@@ -46,10 +46,10 @@ export default function Quiz() {
     // Committed answer with result data
     const [commitedAnswer, setCommitedAnswer] = useState(false)
 
-    // Generate clickable answer elements with appropriate styling = including disablign answers if an answer has been commited
+    // Generate clickable answer elements with appropriate styling = including disabling answers if an answer has been commited
     const answerElements = shuffledAnswersArray.map((element, index) =>
         <p
-            className={`answer${selectedAnswer === element ? ' clicked-answer' : ''} ${classCalculator(element)} ${commitedAnswer ? 'disabled' : null}`}
+            className={`answer${selectedAnswer === element ? ' clicked-answer' : ''} ${classCalculator(element)} ${commitedAnswer ? 'disabled' : ''}`}
             key={index + 1} onClick={e => setSelectedAnswer(e.target.textContent)}
             disabled={commitedAnswer ? true : false}
         >{element}
@@ -61,9 +61,12 @@ export default function Quiz() {
     // Array tracking all answered questions with results
     const [answeredQuestions, setAnsweredQuestions] = useState(progressData)
 
+    const [isVisible, setIsVisible] = useState(true)
+
 
     // Resets all state to start a new quiz game
     function startNewGame() {
+        setIsVisible(true)
         const newQuestion = getRandomQuestion()
         setCurrentQuestion(newQuestion)
         setShuffledAnswersArray(getShuffledAnswers(newQuestion))
@@ -71,6 +74,7 @@ export default function Quiz() {
         setCommitedAnswer(false)
         setTurnCount(0)
         setAnsweredQuestions(progressData)
+        
     }
 
     /* Calculates CSS class for answer elements based on game state
@@ -90,6 +94,8 @@ export default function Quiz() {
             } else {
                 return ''
             }
+        } else {
+            return ''
         }
     }
 
@@ -102,6 +108,7 @@ export default function Quiz() {
             // Advance to next question
             setSelectedAnswer(null)
             // Delay to allow transitions to complete for good UX
+            setIsVisible(false)
             setTimeout(() => {
                 setTurnCount(prev => prev + 1)
                 setCommitedAnswer(null)
@@ -111,6 +118,7 @@ export default function Quiz() {
                 const newQuestion = getRandomQuestion()
                 setCurrentQuestion(newQuestion)
                 setShuffledAnswersArray(getShuffledAnswers(newQuestion))
+                setIsVisible(true)
             }, 600)
             // If answer is selected but not committed, commit it
         } else if (selectedAnswer) {
@@ -126,8 +134,8 @@ export default function Quiz() {
             {turnCount < 10 ?
                 <>
                     <section className="question-section">
-                        <h2 className="title">Question {turnCount + 1}</h2>
-                        <div className="question-container">
+                        <h2 className="title">Question <span className={`question-number-text${isVisible ? ' visible' : ''}`}>{turnCount + 1}</span></h2>
+                        <div className={`question-container${isVisible ? ' visible' : ''}`}>
                             {/* Display current question text */}
                             <p className="question">{question}</p>
                             {/* Render clickable answer options */}

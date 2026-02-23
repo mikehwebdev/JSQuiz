@@ -22,7 +22,7 @@
   /* Colors */
   --colour-light-gray: #F8F9FA;
   --colour-light-blue: #F0F4FF;
-  --colour-clicked-answer: #E8ECFF;
+  --colour-blueish-gray: #E8ECFF;
   --colour-dark-blue: #2D4A7B;
   --colour-medium-gray: #666666;
   --colour-dark-gray: #212121;
@@ -173,6 +173,12 @@ button:hover > svg {
   display: flex;
   flex-direction: column;
   align-items: center;
+  opacity: 0;
+  transition: opacity 250ms ease-in;
+}
+
+.visible {
+  opacity: 1;
 }
 
 /* Question text styling */
@@ -187,7 +193,15 @@ button:hover > svg {
 
 /* Current question counter display */
 .question-number-text {
-  margin-bottom: 3rem;
+  opacity: 0;
+  font-size: var(--font-size-large);
+  color: var(--colour-dark-blue);
+  line-height: var(--line-height);
+  transition: opacity 250ms ease-in;
+}
+
+.question-number-text.visible {
+  opacity: 1;
 }
 
 /* Individual answer option styling */
@@ -198,7 +212,7 @@ button:hover > svg {
   font-style: italic;
   display: flex;
   align-items: center;
-  transition: border 500ms ease-in, box-shadow 500ms ease-in, color 500ms ease-in, background-color 500ms ease-in;
+  transition: border 500ms ease-in, box-shadow 500ms ease-in, color 500ms ease-in, background-color 500ms ease-in, transform 250ms ease-in;
   width: auto;
   border-radius: .45rem;
   padding: .5em .75em;
@@ -206,15 +220,16 @@ button:hover > svg {
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  border: 1px transparent solid;
+  border: 2px var(--colour-blueish-gray) solid;
   line-height: var(--line-height);
 }
 
 /* Selected answer highlight state */
 .clicked-answer {
-  background-color: var(--colour-clicked-answer);
+  background-color: var(--colour-blueish-gray);
   border: 1px var(--colour-medium-gray) solid;
   box-shadow: 0 8px 16px rgba(26, 26, 26, 0.15), 0 2px 4px rgba(26, 26, 26, 0.1);
+  transform: scale(1.05);
 }
 
 /* ==================== PROGRESS TRACKING ==================== */
