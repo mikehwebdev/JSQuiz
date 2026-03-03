@@ -1,16 +1,75 @@
-# React + Vite
+# Mikey's Web Development Quiz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based flashcard quiz that helps reinforce JavaScript fundamentals through randomized questions, immediate feedback, and a review summary at the end.
 
-Currently, two official plugins are available:
+## Live Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Live Demo: https://mikeyswebdevelopmentquiz.netlify.app/
+- Source Code: https://github.com/mikehwebdev/JSQuiz
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Randomized questions from a large question bank
+- Shuffled answer choices to prevent pattern learning
+- Immediate correctness feedback after committing an answer
+- Progress tracker with correct/incorrect indicators
+- End-of-quiz summary with links to learn more about missed topics
+- Restart flow to replay a fresh set of questions
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- JavaScript (ES6+)
+- CSS
+- React Icons
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm
+
+### Installation
+
+npm install
+
+### Run locally
+
+npm run dev
+
+### Build for production
+
+npm run build
+
+## Technical Decisions
+
+- Question flow: Random selection plus per-question answer shuffling to keep each run unique.
+- State model: Local component state tracks the current question, selection, and game progress.
+- Review UX: A post-game summary lists correct answers and provides a fast path to learn more.
+
+## Accessibility & UX
+
+- Clear visual feedback for correct vs. incorrect answers.
+- Consistent button labeling for commit/next actions.
+- Readable layout and spacing across desktop and mobile sizes.
+
+## Challenges & Learnings
+
+- Coordinating answer selection with commit state without premature feedback.
+- Keeping quiz progress accurate while swapping in new random questions.
+- Balancing quick gameplay with a useful review experience.
+
+## Future Improvements
+
+- Add categories and difficulty levels.
+- Track score history and streaks across sessions.
+- Improve keyboard navigation and focus states.
+
+## About Me
+
+I’m a junior frontend developer focused on building practical, user-friendly interfaces with React. This project reflects my approach to clean component structure, resilient state handling, and iterative improvement through real-world problem solving.
+
+- LinkedIn: https://www.linkedin.com/in/michael-hatton-29927b95/
+- Portfolio: https://www.mikehatton.net/
